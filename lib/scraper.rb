@@ -38,8 +38,10 @@ class Scraper
 
     profiles[:quote] = profile_page.css(".profile-quote").text if profile_page.css(".profile-quote").text
 
-    profiles[:bio] = profile_page.css("div.bio-content.content-holder div.description-holder").text 
+    profiles[:bio] = profile_page.css("div.bio-content.content-holder div.description-holder").text
     if profile_page.css("div.bio-content.content-holder div.description-holder").text
+
+      profiles
   end
 
 end
