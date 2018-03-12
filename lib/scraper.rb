@@ -14,7 +14,8 @@ class Scraper
       name = student.css(".student-name").text
 
       students << {name: name, location: location, profile_url: profile}
-
+    end
+    students
   end
 
   def self.scrape_profile_page(profile_url)
