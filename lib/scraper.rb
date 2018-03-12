@@ -21,29 +21,24 @@ class Scraper
   def self.scrape_profile_page(profile_url)
     profile_page = Nokogiri::HTML(open(profile_url))
 
-    profiles = {}
+    students = {}
 
-    link = profile_page.css(".social-icon-container").children.css("a").map { |soc| soc.attribute('href').value}
-    link.each do |li|
-      if li.include?("linkedin")
-        profiles[:linkedin] = li
-      elsif li.include?("github")
-        profiles[:github] = li
-      elsif li.include?("twitter")
-        profiles[:twitter] = li
+    social_media_link = profile_page.css(".social-icon-container").children.css("a").map { |el| el.attribute('href').value}
+    social_media_link.each do |link|
+      if link.include?("linkedin")
+        students[:linkedin] = link
+      elsif link.include?("github")
+        students[:github] = link
+      elsif link.include?("twitter")
+        students[:twitter] = link
       else
-        profiles[:blog] = li
+        students[:blog] = link
       end
     end
 
-    profiles[:quote] = profile_page.css(".profile-quote").text if profile_page.css(".profile-quote").text
+    students[:profile_quote] = profile_page.css(".profile-quote").text if profile_page.css(".profile-quote")
+    students[:bio] = profile_page.css("div.bio-content.content-holder div.description-holder p").text if profile_page.css("div.bio-content.content-holder div.description-holder p")
+    students
+   end	  
 
-    profiles[:bio] = profile_page.css("div.bio-content.content-holder div.description-holder").text
-    if profile_page.css("div.bio-content.content-holder div.description-holder").text
-
-      profiles
-  end
-
-end
-
-end
+ end
