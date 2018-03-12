@@ -26,13 +26,13 @@ class Scraper
     link = profile_page.css(".social-icon-container").children.css("a").map { |soc| soc.attribute('href').value}
     link.each do |li|
       if li.include?("linkedin")
-        profiles[:linkedin] = link
+        profiles[:linkedin] = li
       elsif li.include?("github")
-        profiles[:github] = link
+        profiles[:github] = li
       elsif li.include?("twitter")
-        profiles[:twitter] = link
+        profiles[:twitter] = li
       else
-        profiles[:blog] = link
+        profiles[:blog] = li
       end
     end
 
