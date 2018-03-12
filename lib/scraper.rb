@@ -10,6 +10,10 @@ class Scraper
 
     html.css(".student-card a").each do |student|
       profile = "#{student.attr('href')}"
+      location = student.css(".student-location").text
+      name = student.css(".student-name").text
+
+      
   end
 
   def self.scrape_profile_page(profile_url)
